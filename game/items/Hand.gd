@@ -17,6 +17,7 @@ func _process(delta):
 	if open and not toast_cache.empty():
 		for toast in toast_cache:
 			print(toast)
+			toast_cache.remove(toast_cache.find(toast))
 			var type = toast.toasted()
 			emit_signal('toasted', type)
 

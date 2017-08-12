@@ -6,9 +6,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 7.32375, 7.29585 )
+extents = Vector2( 7.32375, 5.70579 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=5]
 
 custom_solver_bias = 0.0
 extents = Vector2( 12.1822, 10.2865 )
@@ -30,7 +30,7 @@ tracks/0/keys = {
 "values": [ Rect2( 24, 40, 24, 24 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=6]
 
 resource/name = "open"
 length = 0.2
@@ -51,7 +51,7 @@ tracks/0/keys = {
 
 texture = ExtResource( 1 )
 region = true
-region_rect = Rect2( 24, 40, 24, 24 )
+region_rect = Rect2( 0, 40, 24, 24 )
 script/script = ExtResource( 2 )
 hand = "left"
 
@@ -76,7 +76,7 @@ _update_shape_index = 0
 [node name="Input" type="Area2D" parent="."]
 
 input/pickable = true
-shapes/0/shape = SubResource( 2 )
+shapes/0/shape = SubResource( 5 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 2 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -87,7 +87,7 @@ angular_damp = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Input"]
 
 transform/pos = Vector2( 0, 2 )
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 trigger = false
 _update_shape_index = 0
 
@@ -97,7 +97,7 @@ playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
 anims/close = SubResource( 4 )
-anims/open = SubResource( 3 )
+anims/open = SubResource( 6 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
