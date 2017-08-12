@@ -99,8 +99,8 @@ max_lines_visible = -1
 [node name="DsMode" type="Control" parent="ui"]
 
 visibility/opacity = 0.0
-focus/ignore_mouse = false
-focus/stop_mouse = true
+focus/ignore_mouse = true
+focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
@@ -111,8 +111,8 @@ script/script = SubResource( 1 )
 
 [node name="ColorFrame" type="ColorFrame" parent="ui/DsMode"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
+focus/ignore_mouse = true
+focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
@@ -123,8 +123,8 @@ color = Color( 0.113281, 0.113281, 0.113281, 0.55051 )
 
 [node name="ColorFrame1" type="ColorFrame" parent="ui/DsMode"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
+focus/ignore_mouse = true
+focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
