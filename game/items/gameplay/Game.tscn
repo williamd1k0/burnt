@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://game/items/gameplay/Game.gd" type="Script" id=1]
-[ext_resource path="res://game/items/Hand.tscn" type="PackedScene" id=2]
-[ext_resource path="res://game/items/Toaster.tscn" type="PackedScene" id=3]
-[ext_resource path="res://game/items/Spawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/textures/background.png" type="Texture" id=2]
+[ext_resource path="res://game/items/Hand.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/items/Toaster.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/items/Spawner.tscn" type="PackedScene" id=5]
 
 [node name="Game" type="Node2D"]
 
@@ -14,21 +15,26 @@ __meta__ = {
 auto_start = false
 difficult = null
 
-[node name="LeftHand" parent="." instance=ExtResource( 2 )]
+[node name="Background" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+centered = false
+
+[node name="LeftHand" parent="." instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 12, 52 )
 
-[node name="RightHand" parent="." instance=ExtResource( 2 )]
+[node name="RightHand" parent="." instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 52, 52 )
 transform/scale = Vector2( -1, 1 )
 hand = "right"
 
-[node name="Toaster" parent="." instance=ExtResource( 3 )]
+[node name="Toaster" parent="." instance=ExtResource( 4 )]
 
-transform/pos = Vector2( 32, 32 )
+transform/pos = Vector2( 32, 31 )
 
-[node name="Spawner" parent="." instance=ExtResource( 4 )]
+[node name="Spawner" parent="." instance=ExtResource( 5 )]
 
 [connection signal="miss" from="LeftHand" to="." method="_on_LeftHand_miss"]
 
