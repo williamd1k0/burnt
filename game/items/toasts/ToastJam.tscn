@@ -4,7 +4,10 @@
 
 [node name="Toast" instance=ExtResource( 1 )]
 
-region_rect = Rect2( 48, 32, 16, 16 )
 type = 1
+
+[node name="Toast" parent="."]
+
+region_rect = Rect2( 48, 32, 16, 16 )
 
 

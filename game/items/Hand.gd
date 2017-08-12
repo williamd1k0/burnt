@@ -2,6 +2,7 @@ tool
 extends Sprite
 
 signal toasted(type)
+signal miss(type)
 
 export(String, 'none', 'left', 'right') var hand setget _set_hand
 var open = false
@@ -15,8 +16,8 @@ func _ready():
 func _process(delta):
 	if open and not toast_cache.empty():
 		for toast in toast_cache:
-			print(toast.get_parent())
-			var type = toast.get_parent().toasted()
+			print(toast)
+			var type = toast.toasted()
 			emit_signal('toasted', type)
 
 func _set_hand(side):
@@ -43,6 +44,7 @@ func _on_Area2D_area_enter(area):
 func _on_Area2D_area_exit( area ):
 	if area in toast_cache:
 		toast_cache.remove(toast_cache.find(area))
+		emit_signal('miss', area.type)
 
 func _input(event):
 	if event.is_action("%s-hand" % hand):
