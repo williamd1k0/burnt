@@ -15,6 +15,14 @@ var playing = false
 func _ready():
 	if auto_start:
 		start()
+	set_process_input(true)
+
+func _input(event):
+	if event.is_action_pressed('pause'):
+		get_tree().set_pause(not get_tree().is_paused())
+	if event.type == InputEvent.MOUSE_BUTTON:
+		if event.doubleclick:
+			OS.set_window_size(OS.get_window_size()*2)
 
 func start():
 	playing = true

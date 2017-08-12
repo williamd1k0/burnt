@@ -30,12 +30,15 @@ tracks/0/keys = {
 
 [node name="Level" type="Node"]
 
+process/pause_mode = 2
 script/script = ExtResource( 1 )
 auto_start = true
 difficult = "hard"
 ds_mode = true
 
 [node name="Game" parent="." instance=ExtResource( 2 )]
+
+process/pause_mode = 1
 
 [node name="ui" type="CanvasLayer" parent="."]
 
