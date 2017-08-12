@@ -11,6 +11,7 @@ enum {
 	GAMEOVER_MISS
 }
 
+signal toasted(type)
 signal gameover(by)
 
 export(bool) var auto_start = false
@@ -39,10 +40,15 @@ func start(diff=null):
 		difficult = diff
 	ToastSpawner.start(DIFFICULT[difficult]['interval'])
 
+func stop():
+	ToastSpawner.stop()
+
 func toasted(type):
 	prints('TOASTED', type)
 	if type == TOAST_BURNT:
 		emit_signal('gameover', GAMEOVER_BURNT)
+	else:
+		emit_signal('toasted', type)
 
 func miss(type):
 	prints('MISSED', type)

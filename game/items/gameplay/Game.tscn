@@ -11,8 +11,8 @@ script/script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-auto_start = true
-difficult = "average"
+auto_start = false
+difficult = null
 
 [node name="LeftHand" parent="." instance=ExtResource( 2 )]
 

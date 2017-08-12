@@ -1,0 +1,168 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://game/items/gameplay/Level.gd" type="Script" id=1]
+[ext_resource path="res://game/items/gameplay/Game.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/fonts/5x5.tres" type="DynamicFont" id=3]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Control
+
+func you_died():
+	get_node(\"AnimationPlayer\").play(\"you_died\")"
+
+[sub_resource type="Animation" id=2]
+
+resource/name = "you_died"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visibility/opacity")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[node name="Level" type="Node"]
+
+script/script = ExtResource( 1 )
+auto_start = true
+difficult = "hard"
+ds_mode = true
+
+[node name="Game" parent="." instance=ExtResource( 2 )]
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="Score" type="Label" parent="ui"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 1.0
+margin/top = 1.0
+margin/right = 41.0
+margin/bottom = 8.0
+custom_fonts/font = ExtResource( 3 )
+text = "Score:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Total" type="Label" parent="ui"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 24.0
+margin/top = 1.0
+margin/right = 64.0
+margin/bottom = 8.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.734375, 0.140564, 0.293656, 1 )
+text = "0"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="GameOver" type="Label" parent="ui"]
+
+visibility/visible = false
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 8.0
+margin/top = 16.0
+margin/right = 72.0
+margin/bottom = 23.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.179688, 0.0754328, 0.0435181, 1 )
+text = "Game Over"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="DsMode" type="Control" parent="ui"]
+
+visibility/opacity = 0.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+script/script = SubResource( 1 )
+
+[node name="ColorFrame" type="ColorFrame" parent="ui/DsMode"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 64.0
+margin/bottom = 64.0
+color = Color( 0.113281, 0.113281, 0.113281, 0.55051 )
+
+[node name="ColorFrame1" type="ColorFrame" parent="ui/DsMode"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 16.0
+margin/right = 64.0
+margin/bottom = 24.0
+color = Color( 0.0703125, 0.0703125, 0.0703125, 0.55051 )
+
+[node name="YouDied" type="Label" parent="ui/DsMode"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 8.0
+margin/top = 17.0
+margin/right = 72.0
+margin/bottom = 24.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.65625, 0.0769043, 0.0769043, 1 )
+text = "You       Died"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ui/DsMode"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/you_died = SubResource( 2 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[connection signal="gameover" from="Game" to="." method="_on_Game_gameover"]
+
+[connection signal="toasted" from="Game" to="." method="_on_Game_toasted"]
+
+
