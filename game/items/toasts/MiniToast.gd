@@ -2,7 +2,7 @@ tool
 extends Sprite
 
 const SPEED = 64
-export(String, 'none', 'commom', 'jam', 'burnt') var toast = 'none' setget _set_toast
+export(String, 'none', 'common', 'jam', 'burnt') var toast = 'none' setget _set_toast
 
 func _ready():
 	if not get_tree().is_editor_hint():

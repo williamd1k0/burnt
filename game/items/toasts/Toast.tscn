@@ -38,6 +38,9 @@ gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 type = 0
 
 [node name="Toast" type="Sprite" parent="."]

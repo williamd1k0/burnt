@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://game/items/gameplay/Game.gd" type="Script" id=1]
+[ext_resource path="res://game/items/Hand.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/items/Toaster.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/items/Spawner.tscn" type="PackedScene" id=4]
+
+[node name="Game" type="Node2D"]
+
+script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+auto_start = true
+difficult = "average"
+
+[node name="LeftHand" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 12, 52 )
+
+[node name="RightHand" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 52, 52 )
+transform/scale = Vector2( -1, 1 )
+hand = "right"
+
+[node name="Toaster" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 32, 32 )
+
+[node name="Spawner" parent="." instance=ExtResource( 4 )]
+
+[connection signal="miss" from="LeftHand" to="." method="_on_LeftHand_miss"]
+
+[connection signal="toasted" from="LeftHand" to="." method="_on_LeftHand_toasted"]
+
+[connection signal="miss" from="RightHand" to="." method="_on_RightHand_miss"]
+
+[connection signal="toasted" from="RightHand" to="." method="_on_RightHand_toasted"]
+
+

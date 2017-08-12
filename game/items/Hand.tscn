@@ -53,6 +53,9 @@ texture = ExtResource( 1 )
 region = true
 region_rect = Rect2( 0, 40, 24, 24 )
 script/script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 hand = "left"
 
 [node name="Area2D" type="Area2D" parent="."]

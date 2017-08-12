@@ -3,13 +3,13 @@ extends Node
 signal spawned(toast)
 
 const TOASTS = [
-	'commom',
+	'common',
 	'jam',
 	'burnt'
 ]
 
 const TOASTS_NODES = {
-	'commom': preload('res://game/items/toasts/Toast.tscn'),
+	'common': preload('res://game/items/toasts/Toast.tscn'),
 	'jam': preload('res://game/items/toasts/ToastJam.tscn'),
 	'burnt': preload('res://game/items/toasts/ToastBurnt.tscn')
 }
