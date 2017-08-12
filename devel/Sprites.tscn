@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://game/items/Hand.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/items/toasts/Toast.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/items/Toaster.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/items/toasts/ToastJam.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/items/toasts/ToastBurnt.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/textures/lowrezjam.png" type="Texture" id=6]
+
+[node name="Sprites" type="Node2D"]
+
+[node name="HandL" parent="." instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 19, 52 )
+hand = "left"
+
+[node name="HandR" parent="." instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 45, 52 )
+transform/scale = Vector2( -1, 1 )
+hand = "right"
+
+[node name="Toast" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 21, 33 )
+
+[node name="Toaster" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 32.1561, 36.8052 )
+
+[node name="Toast 2" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 43, 17 )
+
+[node name="Toast 3" parent="." instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 21, -3 )
+
+[node name="Title" type="Sprite" parent="."]
+
+transform/pos = Vector2( 32, 8 )
+texture = ExtResource( 6 )
+region = true
+region_rect = Rect2( 0, 0, 32, 16 )
+
+

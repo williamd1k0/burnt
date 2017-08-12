@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://game/items/Spawner.gd" type="Script" id=1]
+[ext_resource path="res://game/items/paths/ToastFollow.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/items/paths/Paths.tscn" type="PackedScene" id=3]
+
+[node name="Spawner" type="Node2D"]
+
+script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+toast_follow = ExtResource( 2 )
+
+[node name="Paths" parent="." instance=ExtResource( 3 )]
+
+

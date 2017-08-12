@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://game/items/toasts/Toast.tscn" type="PackedScene" id=1]
+
+[node name="Toast" instance=ExtResource( 1 )]
+
+region_rect = Rect2( 48, 16, 16, 16 )
+type = 2
+
+
