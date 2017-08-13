@@ -13,12 +13,11 @@ var score = 0
 var playing = false
 
 func _ready():
-	if auto_start:
-		start()
-	set_process_input(true)
+	pass
 
 func _input(event):
-	if event.is_action_pressed('pause'):
+	if event.is_action_pressed('pause') and playing:
+		get_node("ui/Pause").set_hidden(get_tree().is_paused())
 		get_tree().set_pause(not get_tree().is_paused())
 	if event.type == InputEvent.MOUSE_BUTTON:
 		if event.doubleclick:
@@ -42,3 +41,7 @@ func _on_Game_gameover( by ):
 	else:
 		get_node("ui/GameOver").show()
 
+func _on_Game_ready():
+	if auto_start:
+		start()
+	set_process_input(true)

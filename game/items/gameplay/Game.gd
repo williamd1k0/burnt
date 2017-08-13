@@ -11,6 +11,7 @@ enum {
 	GAMEOVER_MISS
 }
 
+signal ready
 signal toasted(type)
 signal gameover(by)
 
@@ -68,3 +69,7 @@ func _on_LeftHand_miss( type ):
 
 func _on_RightHand_miss( type ):
 	miss(type)
+
+func _on_AnimationPlayer_finished():
+	if get_node("AnimationPlayer").get_current_animation() == 'start':
+		emit_signal("ready")

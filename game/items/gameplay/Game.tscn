@@ -1,10 +1,61 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://game/items/gameplay/Game.gd" type="Script" id=1]
 [ext_resource path="res://game/items/Background.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/items/Hand.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/items/Toaster.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game/items/Spawner.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Animation" id=3]
+
+resource/name = "done"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hands:transform/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 23 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+
+resource/name = "reset"
+length = 0.1
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hands:transform/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+
+resource/name = "start"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hands:transform/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 23 ), Vector2( 0, 0 ) ]
+}
 
 [node name="Game" type="Node2D"]
 
@@ -17,11 +68,15 @@ difficult = null
 
 [node name="Background" parent="." instance=ExtResource( 2 )]
 
-[node name="LeftHand" parent="." instance=ExtResource( 3 )]
+[node name="Hands" type="Node2D" parent="."]
+
+transform/pos = Vector2( 0, 23 )
+
+[node name="LeftHand" parent="Hands" instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 12, 52 )
 
-[node name="RightHand" parent="." instance=ExtResource( 3 )]
+[node name="RightHand" parent="Hands" instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 52, 52 )
 transform/scale = Vector2( -1, 1 )
@@ -33,12 +88,27 @@ transform/pos = Vector2( 32, 31 )
 
 [node name="Spawner" parent="." instance=ExtResource( 5 )]
 
-[connection signal="miss" from="LeftHand" to="." method="_on_LeftHand_miss"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
-[connection signal="toasted" from="LeftHand" to="." method="_on_LeftHand_toasted"]
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/done = SubResource( 3 )
+anims/reset = SubResource( 1 )
+anims/start = SubResource( 2 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "start"
 
-[connection signal="miss" from="RightHand" to="." method="_on_RightHand_miss"]
+[connection signal="miss" from="Hands/LeftHand" to="." method="_on_LeftHand_miss"]
 
-[connection signal="toasted" from="RightHand" to="." method="_on_RightHand_toasted"]
+[connection signal="toasted" from="Hands/LeftHand" to="." method="_on_LeftHand_toasted"]
+
+[connection signal="miss" from="Hands/RightHand" to="." method="_on_RightHand_miss"]
+
+[connection signal="toasted" from="Hands/RightHand" to="." method="_on_RightHand_toasted"]
+
+[connection signal="finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_finished"]
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://game/items/gameplay/Level.gd" type="Script" id=1]
 [ext_resource path="res://game/items/gameplay/Game.tscn" type="PackedScene" id=2]
@@ -28,11 +28,28 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
+[sub_resource type="CanvasItemShader" id=3]
+
+_code = {
+"fragment": "vec3 overlay = texscreen(SCREEN_UV)*clamp(sin(TIME*3), 0.3, 1);
+COLOR.rgb = overlay;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=4]
+
+shader/shader = SubResource( 3 )
+shader/shading_mode = 0
+
 [node name="Level" type="Node"]
 
 process/pause_mode = 2
 script/script = ExtResource( 1 )
-auto_start = false
+auto_start = true
 difficult = "hard"
 ds_mode = true
 
@@ -59,7 +76,7 @@ margin/right = 41.0
 margin/bottom = 8.0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.733333, 0.141176, 0.294118, 1 )
-text = "Score:"
+text = "Score"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -102,6 +119,7 @@ max_lines_visible = -1
 
 [node name="DsMode" type="Control" parent="ui"]
 
+editor/display_folded = true
 visibility/opacity = 0.0
 focus/ignore_mouse = true
 focus/stop_mouse = false
@@ -112,6 +130,10 @@ margin/top = 0.0
 margin/right = 40.0
 margin/bottom = 40.0
 script/script = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="ColorFrame" type="ColorFrame" parent="ui/DsMode"]
 
@@ -165,7 +187,52 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
+[node name="Pause" type="Control" parent="ui"]
+
+editor/display_folded = true
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+
+[node name="Overlay" type="ColorFrame" parent="ui/Pause"]
+
+material/material = SubResource( 4 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 64.0
+margin/bottom = 64.0
+color = Color( 1, 1, 1, 1 )
+
+[node name="Paused" type="Label" parent="ui/Pause"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 15.0
+margin/top = 16.0
+margin/right = 51.0
+margin/bottom = 23.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.705882, 0.137255, 0.282353, 1 )
+text = "Paused"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [connection signal="gameover" from="Game" to="." method="_on_Game_gameover"]
+
+[connection signal="ready" from="Game" to="." method="_on_Game_ready"]
 
 [connection signal="toasted" from="Game" to="." method="_on_Game_toasted"]
 
