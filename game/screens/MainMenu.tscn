@@ -1,0 +1,152 @@
+[gd_scene load_steps=14 format=1]
+
+[ext_resource path="res://game/screens/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://game/items/gameplay/Game.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/textures/ui.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/lowrezjam.png" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 9 )
+margin = Rect2( 0, 0, 0, 0 )
+
+[sub_resource type="AtlasTexture" id=2]
+
+atlas = ExtResource( 3 )
+region = Rect2( 0, 18, 16, 10 )
+margin = Rect2( 0, 0, 0, 0 )
+
+[sub_resource type="AtlasTexture" id=3]
+
+atlas = ExtResource( 3 )
+region = Rect2( 0, 9, 16, 9 )
+margin = Rect2( 0, 0, 0, 0 )
+
+[sub_resource type="AtlasTexture" id=4]
+
+atlas = ExtResource( 3 )
+region = Rect2( 0, 9, 16, 9 )
+margin = Rect2( 0, 0, 0, 0 )
+
+[sub_resource type="AtlasTexture" id=5]
+
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 9 )
+margin = Rect2( 0, 0, 0, 0 )
+
+[sub_resource type="AtlasTexture" id=6]
+
+atlas = ExtResource( 3 )
+region = Rect2( 16, 18, 16, 9 )
+margin = Rect2( 0, 0, 0, 0 )
+
+[sub_resource type="AtlasTexture" id=7]
+
+atlas = ExtResource( 3 )
+region = Rect2( 16, 9, 16, 9 )
+margin = Rect2( 0, 0, 0, 0 )
+
+[sub_resource type="AtlasTexture" id=8]
+
+atlas = ExtResource( 3 )
+region = Rect2( 16, 9, 16, 9 )
+margin = Rect2( 0, 0, 0, 0 )
+
+[sub_resource type="AtlasTexture" id=9]
+
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 32, 16 )
+margin = Rect2( 0, 0, 0, 0 )
+
+[node name="MainMenu" type="Node"]
+
+script/script = ExtResource( 1 )
+
+[node name="Game" parent="." instance=ExtResource( 2 )]
+
+editor/display_folded = true
+auto_start = true
+difficult = "easy"
+
+[node name="AnimationPlayer" parent="Game"]
+
+autoplay = ""
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="Menus" type="Control" parent="ui"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+
+[node name="Play" type="TextureButton" parent="ui/Menus"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 24.0
+margin/top = 43.0
+margin/right = 40.0
+margin/bottom = 52.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = SubResource( 1 )
+textures/pressed = SubResource( 2 )
+textures/hover = SubResource( 3 )
+textures/focused = SubResource( 4 )
+params/resize_mode = 0
+params/stretch_mode = 0
+
+[node name="Quit" type="TextureButton" parent="ui/Menus"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 24.0
+margin/top = 53.0
+margin/right = 40.0
+margin/bottom = 62.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = SubResource( 5 )
+textures/pressed = SubResource( 6 )
+textures/hover = SubResource( 7 )
+textures/focused = SubResource( 8 )
+params/resize_mode = 0
+params/stretch_mode = 0
+
+[node name="Title" type="TextureFrame" parent="ui/Menus"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 16.0
+margin/top = 5.0
+margin/right = 48.0
+margin/bottom = 21.0
+texture = SubResource( 9 )
+stretch_mode = 0
+
+[connection signal="pressed" from="ui/Menus/Play" to="." method="_on_Play_pressed"]
+
+[connection signal="pressed" from="ui/Menus/Quit" to="." method="_on_Quit_pressed"]
+
+
+[editable path="Game"]
