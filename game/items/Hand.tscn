@@ -111,7 +111,7 @@ autoplay = "close"
 
 params/volume_db = 0.0
 params/pitch_scale = 1.0
-params/attenuation/min_distance = 1.0
+params/attenuation/min_distance = 64.0
 params/attenuation/max_distance = 2048.0
 params/attenuation/distance_exp = 1.0
 config/polyphony = 1

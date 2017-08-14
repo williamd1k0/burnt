@@ -45,8 +45,8 @@ func can_move():
 
 func _on_Area2D_area_enter(area):
 	if area.is_in_group('toast') and can_move():
-		print('TOASTED')
 		toast_cache.append(area)
+		area.bump()
 
 func _on_Area2D_area_exit( area ):
 	if area in toast_cache and can_move():

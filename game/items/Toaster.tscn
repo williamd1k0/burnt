@@ -77,7 +77,7 @@ params/attenuation/max_distance = 2048.0
 params/attenuation/distance_exp = 1.0
 config/polyphony = 1
 config/samples = ExtResource( 3 )
-config/pitch_random = 0.0
+config/pitch_random = 0.3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
