@@ -17,6 +17,7 @@ const TOASTS_NODES = {
 export(float) var interval = 0.5
 export(bool) var auto_start = false
 var enabled = false
+var difficulty
 
 func _ready():
 	#connect('spawned', self, '_on_spawned')

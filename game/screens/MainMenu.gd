@@ -1,8 +1,12 @@
 extends Node
 
+signal play(difficulty)
+
 var stack = []
 
 func _ready():
+	for button in get_node("ui/Menus/Difficulty/Buttons").get_children():
+		button.connect('pressed', self, '_on_Difficulty_pressed', [button.get_name()])
 	set_process_input(true)
 
 func _input(event):
@@ -12,6 +16,9 @@ func _input(event):
 func rollback_stack():
 	stack.pop_front()
 	get_node("MenuStack").play(stack[0])
+
+func _on_Difficulty_pressed(diff):
+	emit_signal('play', diff.to_lower())
 
 func _on_Play_pressed():
 	get_node("MenuStack").play("diff")

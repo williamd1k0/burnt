@@ -1,7 +1,7 @@
 extends Node
 
 export(bool) var auto_start = false
-export(String, 'easy', 'average', 'hard') var difficult
+export(String, 'easy', 'normal', 'hard') var difficulty
 export(bool) var ds_mode = false
 
 const POINTS = [
@@ -13,19 +13,17 @@ var score = 0
 var playing = false
 
 func _ready():
-	pass
+	if ToastSpawner.difficulty != null:
+		difficulty = ToastSpawner.difficulty
 
 func _input(event):
 	if event.is_action_pressed('ui_cancel') and playing:
 		get_node("ui/Pause").set_hidden(get_tree().is_paused())
 		get_tree().set_pause(not get_tree().is_paused())
-	if event.type == InputEvent.MOUSE_BUTTON:
-		if event.doubleclick:
-			OS.set_window_size(OS.get_window_size()*2)
 
 func start():
 	playing = true
-	get_node("Game").start(difficult)
+	get_node("Game").start(difficulty)
 
 func _on_Game_toasted( type ):
 	score += POINTS[type]

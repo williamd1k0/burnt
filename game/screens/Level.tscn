@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=1]
 
-[ext_resource path="res://game/items/gameplay/Level.gd" type="Script" id=1]
+[ext_resource path="res://game/screens/Level.gd" type="Script" id=1]
 [ext_resource path="res://game/items/gameplay/Game.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/fonts/5x5.tres" type="DynamicFont" id=3]
 
@@ -50,8 +50,8 @@ shader/shading_mode = 0
 process/pause_mode = 2
 script/script = ExtResource( 1 )
 auto_start = true
-difficult = "hard"
-ds_mode = true
+difficulty = null
+ds_mode = false
 
 [node name="Game" parent="." instance=ExtResource( 2 )]
 
