@@ -6,7 +6,7 @@ func _ready():
 	set_process_input(true)
 
 func _input(event):
-	if event.is_action_pressed("pause") and stack.size() > 1:
+	if event.is_action_pressed("ui_cancel") and stack.size() > 1:
 		rollback_stack()
 
 func rollback_stack():
