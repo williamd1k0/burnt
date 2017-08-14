@@ -19,15 +19,15 @@ export(bool) var auto_start = false
 export(String, 'easy', 'normal', 'hard') var difficulty = 'easy'
 const DIFFICULTY = {
 	'easy': {
-		'interval': 1,
+		'interval': 0.5,
 		'required': []
 	},
 	'normal': {
-		'interval': 0.7,
+		'interval': 0.4,
 		'required': [TOAST_COMMON]
 	},
 	'hard': {
-		'interval': 0.5,
+		'interval': 0.2,
 		'required': [TOAST_COMMON, TOAST_JAM]
 	}
 }
@@ -40,9 +40,12 @@ func _ready():
 func start(diff=null):
 	if diff != null:
 		difficulty = diff
+	for toast in get_tree().get_nodes_in_group('toast'):
+		toast.free()
 	ToastSpawner.start(DIFFICULTY[difficulty]['interval'])
 	for hand in get_node("Hands").get_children():
 		hand.enabled = true
+		hand.toast_cache.clear()
 
 func stop():
 	ToastSpawner.stop()
