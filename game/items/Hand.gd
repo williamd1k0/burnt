@@ -21,6 +21,7 @@ func _process(delta):
 			toast_cache.remove(toast_cache.find(toast))
 			var type = toast.toasted()
 			emit_signal('toasted', type)
+			get_node("Sfx").play("toasted")
 
 func _set_hand(side):
 	hand = side

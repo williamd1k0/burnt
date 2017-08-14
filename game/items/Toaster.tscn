@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://assets/textures/lowrezjam.png" type="Texture" id=1]
 [ext_resource path="res://game/items/Toaster.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/sfx.tres" type="SampleLibrary" id=3]
 
 [sub_resource type="Animation" id=1]
 
@@ -18,6 +19,16 @@ tracks/0/keys = {
 "transitions": FloatArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 10, 1 ), Vector2( 10, 2 ), Vector2( 10, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sfx:play/play")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 2,
+"values": [ "eject" ]
 }
 
 [node name="Toaster" type="Sprite"]
@@ -56,6 +67,17 @@ transform/pos = Vector2( 10, 1 )
 texture = ExtResource( 1 )
 region = true
 region_rect = Rect2( 21, 23, 2, 4 )
+
+[node name="Sfx" type="SamplePlayer2D" parent="."]
+
+params/volume_db = 0.0
+params/pitch_scale = 1.0
+params/attenuation/min_distance = 1.0
+params/attenuation/max_distance = 2048.0
+params/attenuation/distance_exp = 1.0
+config/polyphony = 1
+config/samples = ExtResource( 3 )
+config/pitch_random = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
