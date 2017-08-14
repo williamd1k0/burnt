@@ -14,7 +14,7 @@ func _ready():
 		set_process(true)
 
 func _process(delta):
-	if open and not toast_cache.empty():
+	if open and not toast_cache.empty() and is_visible():
 		for toast in toast_cache:
 			print(toast)
 			toast_cache.remove(toast_cache.find(toast))
@@ -31,24 +31,25 @@ func _set_hand(side):
 		set_scale(Vector2(0, 0))
 
 func set_open(val):
-	open = val
-	if open:
-		get_node("anim").play("open")
-	else:
-		get_node("anim").play("close")
+	if val != open:
+		open = val
+		if open:
+			get_node("anim").play("open")
+		else:
+			get_node("anim").play("close")
 
 func _on_Area2D_area_enter(area):
-	if area.is_in_group('toast'):
+	if area.is_in_group('toast') and is_visible():
 		print('TOASTED')
 		toast_cache.append(area)
 
 func _on_Area2D_area_exit( area ):
-	if area in toast_cache:
+	if area in toast_cache and is_visible():
 		toast_cache.remove(toast_cache.find(area))
 		emit_signal('miss', area.type)
 
 func _input(event):
-	if event.is_action("%s-hand" % hand):
+	if event.is_action("%s-hand" % hand) and is_visible():
 		set_open(event.is_pressed())
 
 func _on_input_event( viewport, event, shape_idx ):

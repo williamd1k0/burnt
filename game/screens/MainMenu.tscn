@@ -203,6 +203,10 @@ autoplay = "start"
 auto_start = true
 difficult = "easy"
 
+[node name="Hands" parent="Game"]
+
+visibility/visible = false
+
 [node name="AnimationPlayer" parent="Game"]
 
 autoplay = ""
