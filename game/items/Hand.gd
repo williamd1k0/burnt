@@ -7,6 +7,7 @@ signal miss(type)
 export(String, 'none', 'left', 'right') var hand setget _set_hand
 var open = false
 var toast_cache = []
+var enabled = true
 
 func _ready():
 	if not get_tree().is_editor_hint():
@@ -38,18 +39,21 @@ func set_open(val):
 		else:
 			get_node("anim").play("close")
 
+func can_move():
+	return is_visible() and enabled
+
 func _on_Area2D_area_enter(area):
-	if area.is_in_group('toast') and is_visible():
+	if area.is_in_group('toast') and can_move():
 		print('TOASTED')
 		toast_cache.append(area)
 
 func _on_Area2D_area_exit( area ):
-	if area in toast_cache and is_visible():
+	if area in toast_cache and can_move():
 		toast_cache.remove(toast_cache.find(area))
 		emit_signal('miss', area.type)
 
 func _input(event):
-	if event.is_action("%s-hand" % hand) and is_visible():
+	if event.is_action("%s-hand" % hand) and can_move():
 		set_open(event.is_pressed())
 
 func _on_input_event( viewport, event, shape_idx ):

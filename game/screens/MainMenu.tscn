@@ -110,7 +110,7 @@ atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 32, 16 )
 margin = Rect2( 0, 0, 0, 0 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=7]
 
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 16, 9 )
@@ -128,7 +128,7 @@ atlas = ExtResource( 4 )
 region = Rect2( 0, 9, 16, 9 )
 margin = Rect2( 0, 0, 0, 0 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=10]
 
 atlas = ExtResource( 4 )
 region = Rect2( 0, 27, 16, 9 )
@@ -146,7 +146,7 @@ atlas = ExtResource( 4 )
 region = Rect2( 0, 36, 16, 9 )
 margin = Rect2( 0, 0, 0, 0 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=16]
 
 atlas = ExtResource( 4 )
 region = Rect2( 25, 18, 39, 9 )
@@ -265,7 +265,7 @@ margin/bottom = 52.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = SubResource( 4 )
+textures/normal = SubResource( 7 )
 textures/pressed = SubResource( 5 )
 textures/hover = SubResource( 6 )
 textures/focused = SubResource( 6 )
@@ -285,7 +285,7 @@ margin/bottom = 62.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = SubResource( 7 )
+textures/normal = SubResource( 10 )
 textures/pressed = SubResource( 8 )
 textures/hover = SubResource( 9 )
 textures/focused = SubResource( 9 )
@@ -362,7 +362,7 @@ margin/bottom = 9.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = SubResource( 10 )
+textures/normal = SubResource( 16 )
 textures/hover = SubResource( 11 )
 textures/focused = SubResource( 11 )
 params/resize_mode = 0

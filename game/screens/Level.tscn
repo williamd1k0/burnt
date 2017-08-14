@@ -1,8 +1,85 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=17 format=1]
 
 [ext_resource path="res://game/screens/Level.gd" type="Script" id=1]
 [ext_resource path="res://game/items/gameplay/Game.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/fonts/5x5.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/textures/ui.png" type="Texture" id=4]
+
+[sub_resource type="Animation" id=12]
+
+resource/name = "gameover"
+length = 0.2
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("ui/GameOver:visibility/visible")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("ui/GameOver/Buttons/Play")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "grab_focus"
+} ]
+}
+
+[sub_resource type="Animation" id=11]
+
+resource/name = "play"
+length = 0.2
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("ui/Pause:visibility/visible")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ui/GameOver:visibility/visible")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ui/DsMode:visibility/visible")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ui/Total:text")
+tracks/3/interp = 1
+tracks/3/imported = false
+tracks/3/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ "0" ]
+}
 
 [sub_resource type="GDScript" id=1]
 
@@ -27,6 +104,16 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0.0, 1.0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visibility/visible")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="CanvasItemShader" id=3]
 
@@ -45,6 +132,42 @@ COLOR.rgb = overlay;",
 shader/shader = SubResource( 3 )
 shader/shading_mode = 0
 
+[sub_resource type="AtlasTexture" id=7]
+
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 16, 9 )
+margin = Rect2( 0, 0, 0, 0 )
+
+[sub_resource type="AtlasTexture" id=5]
+
+atlas = ExtResource( 4 )
+region = Rect2( 0, 18, 16, 9 )
+margin = Rect2( 0, 0, 0, 0 )
+
+[sub_resource type="AtlasTexture" id=6]
+
+atlas = ExtResource( 4 )
+region = Rect2( 0, 9, 16, 9 )
+margin = Rect2( 0, 0, 0, 0 )
+
+[sub_resource type="AtlasTexture" id=10]
+
+atlas = ExtResource( 4 )
+region = Rect2( 0, 27, 16, 9 )
+margin = Rect2( 0, 0, 0, 0 )
+
+[sub_resource type="AtlasTexture" id=8]
+
+atlas = ExtResource( 4 )
+region = Rect2( 0, 45, 16, 9 )
+margin = Rect2( 0, 0, 0, 0 )
+
+[sub_resource type="AtlasTexture" id=9]
+
+atlas = ExtResource( 4 )
+region = Rect2( 0, 36, 16, 9 )
+margin = Rect2( 0, 0, 0, 0 )
+
 [node name="Level" type="Node"]
 
 process/pause_mode = 2
@@ -52,6 +175,18 @@ script/script = ExtResource( 1 )
 auto_start = true
 difficulty = null
 ds_mode = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/gameover = SubResource( 12 )
+anims/play = SubResource( 11 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
 
 [node name="Game" parent="." instance=ExtResource( 2 )]
 
@@ -99,27 +234,10 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="GameOver" type="Label" parent="ui"]
-
-visibility/visible = false
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 8.0
-margin/top = 16.0
-margin/right = 72.0
-margin/bottom = 23.0
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color = Color( 0.179688, 0.0754328, 0.0435181, 1 )
-text = "Game Over"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
 [node name="DsMode" type="Control" parent="ui"]
 
 editor/display_folded = true
+visibility/visible = false
 visibility/opacity = 0.0
 focus/ignore_mouse = true
 focus/stop_mouse = false
@@ -230,10 +348,112 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="GameOver" type="Control" parent="ui"]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+
+[node name="Overlay" type="ColorFrame" parent="ui/GameOver"]
+
+material/material = SubResource( 4 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 64.0
+margin/bottom = 64.0
+color = Color( 1, 1, 1, 1 )
+
+[node name="GameOver" type="Label" parent="ui/GameOver"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 8.0
+margin/top = 16.0
+margin/right = 57.0
+margin/bottom = 23.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.705882, 0.137255, 0.282353, 1 )
+text = "Game Over"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Buttons" type="VBoxContainer" parent="ui/GameOver"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 24.0
+margin/top = 43.0
+margin/right = 40.0
+margin/bottom = 62.0
+custom_constants/separation = 1
+alignment = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Play" type="TextureButton" parent="ui/GameOver/Buttons"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 16.0
+margin/bottom = 9.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = SubResource( 7 )
+textures/pressed = SubResource( 5 )
+textures/hover = SubResource( 6 )
+textures/focused = SubResource( 6 )
+params/resize_mode = 0
+params/stretch_mode = 0
+
+[node name="Menu" type="TextureButton" parent="ui/GameOver/Buttons"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 10.0
+margin/right = 16.0
+margin/bottom = 19.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = SubResource( 10 )
+textures/pressed = SubResource( 8 )
+textures/hover = SubResource( 9 )
+textures/focused = SubResource( 9 )
+params/resize_mode = 0
+params/stretch_mode = 0
+
 [connection signal="gameover" from="Game" to="." method="_on_Game_gameover"]
 
 [connection signal="ready" from="Game" to="." method="_on_Game_ready"]
 
 [connection signal="toasted" from="Game" to="." method="_on_Game_toasted"]
+
+[connection signal="pressed" from="ui/GameOver/Buttons/Play" to="." method="_on_Play_pressed"]
+
+[connection signal="pressed" from="ui/GameOver/Buttons/Menu" to="." method="_on_Menu_pressed"]
 
 

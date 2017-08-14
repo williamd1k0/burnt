@@ -1,5 +1,7 @@
 extends Node
 
+signal menu
+
 export(bool) var auto_start = false
 export(String, 'easy', 'normal', 'hard') var difficulty
 export(bool) var ds_mode = false
@@ -25,6 +27,11 @@ func start():
 	playing = true
 	get_node("Game").start(difficulty)
 
+func replay():
+	score = 0
+	get_node("AnimationPlayer").play("play")
+	start()
+
 func _on_Game_toasted( type ):
 	score += POINTS[type]
 	get_node("ui/Total").set_text(str(score))
@@ -37,9 +44,15 @@ func _on_Game_gameover( by ):
 	if ds_mode:
 		get_node("ui/DsMode").you_died()
 	else:
-		get_node("ui/GameOver").show()
+		get_node("AnimationPlayer").play("gameover")
 
 func _on_Game_ready():
 	if auto_start:
 		start()
 	set_process_input(true)
+
+func _on_Play_pressed():
+	replay()
+
+func _on_Menu_pressed():
+	emit_signal('menu')

@@ -21,4 +21,5 @@ func add_level(diff):
 	clear()
 	ToastSpawner.difficulty = diff
 	var level = LEVEL.instance()
+	level.connect('menu', self, 'add_main_menu')
 	add_child(level)

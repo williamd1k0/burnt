@@ -33,6 +33,7 @@ const DIFFICULTY = {
 }
 
 func _ready():
+	connect('gameover', self, '_on_gameover')
 	if auto_start:
 		start()
 
@@ -40,6 +41,8 @@ func start(diff=null):
 	if diff != null:
 		difficulty = diff
 	ToastSpawner.start(DIFFICULTY[difficulty]['interval'])
+	for hand in get_node("Hands").get_children():
+		hand.enabled = true
 
 func stop():
 	ToastSpawner.stop()
@@ -73,3 +76,7 @@ func _on_RightHand_miss( type ):
 func _on_AnimationPlayer_finished():
 	if get_node("AnimationPlayer").get_current_animation() == 'start':
 		emit_signal("ready")
+
+func _on_gameover(by):
+	for hand in get_node("Hands").get_children():
+		hand.enabled = false
