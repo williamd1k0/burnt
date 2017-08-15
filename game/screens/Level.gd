@@ -19,7 +19,7 @@ func _ready():
 		difficulty = ToastSpawner.difficulty
 
 func _input(event):
-	if event.is_action_pressed('ui_cancel') and playing:
+	if event.is_action_pressed('pause') and playing:
 		get_node("ui/Pause").set_hidden(get_tree().is_paused())
 		get_tree().set_pause(not get_tree().is_paused())
 

@@ -15,6 +15,10 @@ func _ready():
 		set_process(true)
 
 func _process(delta):
+	if Input.is_action_pressed("%s-hand" % hand) and can_move():
+		set_open(true)
+	elif can_move():
+		set_open(false)
 	if open and not toast_cache.empty() and is_visible():
 		for toast in toast_cache:
 			print(toast)
@@ -52,10 +56,6 @@ func _on_Area2D_area_exit( area ):
 	if area in toast_cache and can_move():
 		toast_cache.remove(toast_cache.find(area))
 		emit_signal('miss', area.type)
-
-func _input(event):
-	if event.is_action("%s-hand" % hand) and can_move():
-		set_open(event.is_pressed())
 
 func _on_input_event( viewport, event, shape_idx ):
 	if event.type in [InputEvent.MOUSE_BUTTON, InputEvent.SCREEN_TOUCH]:
