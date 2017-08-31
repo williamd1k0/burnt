@@ -40,6 +40,7 @@ func _on_Game_gameover( by ):
 	if not playing:
 		return
 	playing = false
+	LocalScore.new_score(difficulty, score)
 	get_node("Game").stop()
 	if ds_mode:
 		get_node("ui/DsMode").you_died()

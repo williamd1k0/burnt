@@ -11,6 +11,7 @@ var high_scores = {
 func _ready():
 	if file.file_exists(SAVE_PATH):
 		load_highscores()
+		print(high_scores)
 	else:
 		save_highscores()
 
