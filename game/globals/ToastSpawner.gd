@@ -15,6 +15,7 @@ const TOASTS_NODES = {
 }
 
 export(float) var interval = 0.5
+export(FloatArray) var speed_up = FloatArray([10, 0.5])
 export(bool) var auto_start = false
 var enabled = false
 var difficulty
@@ -24,11 +25,15 @@ func _ready():
 	if auto_start:
 		start()
 
-func start(interval_=null):
+func start(interval_=null, speedup=null):
 	if interval_ != null:
 		interval = interval_
+	if speedup != null:
+		speed_up = speedup
 	enabled = true
 	spawn()
+	get_node("Timer2").set_wait_time(speed_up[0])
+	get_node("Timer2").start()
 
 func stop():
 	enabled = false
@@ -46,3 +51,7 @@ func _on_Timer_timeout():
 
 func _on_spawned(toast):
 	prints('SPAWNED:', toast)
+
+
+func _on_Timer2_timeout():
+	interval = max(speed_up[1], interval-0.05)

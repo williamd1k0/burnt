@@ -20,14 +20,17 @@ export(String, 'easy', 'normal', 'hard') var difficulty = 'easy'
 const DIFFICULTY = {
 	'easy': {
 		'interval': 0.5,
+		'speedup': [10, 0.3],
 		'required': []
 	},
 	'normal': {
 		'interval': 0.4,
+		'speedup': [9, 0.2],
 		'required': [TOAST_COMMON]
 	},
 	'hard': {
 		'interval': 0.2,
+		'speedup': [8, 0.1],
 		'required': [TOAST_COMMON, TOAST_JAM]
 	}
 }
@@ -42,7 +45,10 @@ func start(diff=null):
 		difficulty = diff
 	for toast in get_tree().get_nodes_in_group('toast'):
 		toast.free()
-	ToastSpawner.start(DIFFICULTY[difficulty]['interval'])
+	ToastSpawner.start(
+		DIFFICULTY[difficulty]['interval'],
+		DIFFICULTY[difficulty]['speedup']
+	)
 	for hand in get_node("Hands").get_children():
 		hand.enabled = true
 		hand.toast_cache.clear()

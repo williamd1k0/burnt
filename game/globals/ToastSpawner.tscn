@@ -6,6 +6,7 @@
 
 script/script = ExtResource( 1 )
 interval = 1.0
+speed_up = null
 auto_start = false
 
 [node name="Timer" type="Timer" parent="."]
@@ -15,6 +16,15 @@ wait_time = 1.0
 one_shot = true
 autostart = false
 
+[node name="Timer2" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]
 
 
