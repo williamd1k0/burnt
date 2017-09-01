@@ -45,6 +45,8 @@ func _on_Game_gameover( by ):
 	if ds_mode:
 		get_node("ui/DsMode").you_died()
 	else:
+		get_node("ui/GameOver/Diff").set_text(difficulty)
+		get_node("ui/GameOver/Highscore").set_text(str(LocalScore.get_score(difficulty)))
 		get_node("AnimationPlayer").play("gameover")
 
 func _on_Game_ready():
