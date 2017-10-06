@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=1]
+[gd_scene load_steps=18 format=1]
 
 [ext_resource path="res://game/screens/Level.gd" type="Script" id=1]
-[ext_resource path="res://game/items/gameplay/Game.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/fonts/5x5.tres" type="DynamicFont" id=3]
-[ext_resource path="res://assets/textures/ui.png" type="Texture" id=4]
+[ext_resource path="res://game/screens/ScreenControl.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/items/gameplay/Game.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/fonts/5x5.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/textures/ui.png" type="Texture" id=5]
 
 [sub_resource type="Animation" id=1]
 
@@ -133,37 +134,37 @@ shader/shading_mode = 0
 
 [sub_resource type="AtlasTexture" id=7]
 
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 16, 9 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=8]
 
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 0, 18, 16, 9 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=9]
 
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 0, 9, 16, 9 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=10]
 
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 0, 27, 16, 9 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=11]
 
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 0, 45, 16, 9 )
 margin = Rect2( 0, 0, 0, 0 )
 
 [sub_resource type="AtlasTexture" id=12]
 
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 0, 36, 16, 9 )
 margin = Rect2( 0, 0, 0, 0 )
 
@@ -172,8 +173,12 @@ margin = Rect2( 0, 0, 0, 0 )
 process/pause_mode = 2
 script/script = ExtResource( 1 )
 auto_start = true
-difficulty = null
+difficulty = "easy"
 ds_mode = false
+
+[node name="ScreenControl" parent="." instance=ExtResource( 2 )]
+
+next_scene = "MainMenu"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -187,12 +192,13 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = "play"
 
-[node name="Game" parent="." instance=ExtResource( 2 )]
+[node name="Game" parent="." instance=ExtResource( 3 )]
 
 process/pause_mode = 1
 
 [node name="ui" type="CanvasLayer" parent="."]
 
+editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -208,7 +214,7 @@ margin/left = 1.0
 margin/top = 1.0
 margin/right = 41.0
 margin/bottom = 8.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.733333, 0.141176, 0.294118, 1 )
 text = "Score"
 percent_visible = 1.0
@@ -225,7 +231,7 @@ margin/left = 24.0
 margin/top = 1.0
 margin/right = 64.0
 margin/bottom = 8.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.734375, 0.140564, 0.293656, 1 )
 text = "0"
 align = 2
@@ -286,7 +292,7 @@ margin/left = 8.0
 margin/top = 17.0
 margin/right = 72.0
 margin/bottom = 24.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.65625, 0.0769043, 0.0769043, 1 )
 text = "You       Died"
 percent_visible = 1.0
@@ -340,7 +346,7 @@ margin/left = 15.0
 margin/top = 16.0
 margin/right = 51.0
 margin/bottom = 23.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.705882, 0.137255, 0.282353, 1 )
 text = "Paused"
 percent_visible = 1.0
@@ -382,7 +388,7 @@ margin/left = 8.0
 margin/top = 8.0
 margin/right = 57.0
 margin/bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.705882, 0.137255, 0.282353, 1 )
 text = "Game Over"
 percent_visible = 1.0
@@ -399,7 +405,7 @@ margin/left = 8.0
 margin/top = 24.0
 margin/right = 56.0
 margin/bottom = 31.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.705882, 0.137255, 0.282353, 1 )
 text = "Diff"
 align = 1
@@ -417,7 +423,7 @@ margin/left = 8.0
 margin/top = 32.0
 margin/right = 57.0
 margin/bottom = 39.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.705882, 0.137255, 0.282353, 1 )
 text = "000"
 align = 1
@@ -480,6 +486,8 @@ textures/hover = SubResource( 12 )
 textures/focused = SubResource( 12 )
 params/resize_mode = 0
 params/stretch_mode = 0
+
+[connection signal="scene_start" from="ScreenControl" to="." method="_on_ScreenControl_scene_start"]
 
 [connection signal="gameover" from="Game" to="." method="_on_Game_gameover"]
 

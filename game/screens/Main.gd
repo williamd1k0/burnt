@@ -1,25 +1,33 @@
 extends Node
 
-const MAIN_MENU = preload('./MainMenu.tscn')
-const LEVEL = preload('./Level.tscn')
+const SCREEN_CONTROL = 'screen_control'
+const SCREEN_BASE = 'res://game/screens/%s.tscn'
+
+export(String) var first_scene
 
 func _ready():
-	add_main_menu()
+	start_scene(first_scene)
+
+func start_scene(scene, args=null):
+	print(SCREEN_BASE % scene)
+	var scene_node = load(SCREEN_BASE % scene).instance()
+	var control
+	add_child(scene_node)
+	if scene_node.is_in_group(SCREEN_CONTROL):
+		control = scene_node
+	else:
+		for child in scene_node.get_children():
+			if child.is_in_group(SCREEN_CONTROL):
+				control = child
+				break
+	control.connect('scene_change', self, '_on_scene_change')
+	control.start_scene(args)
+
+func _on_scene_change(scene, args):
+	clear() # TODO: fade stuff
+	start_scene(scene, args)
 
 func clear():
 	if get_child_count() > 0:
 		for i in get_children():
 			i.queue_free()
-
-func add_main_menu():
-	clear()
-	var m_menu = MAIN_MENU.instance()
-	m_menu.connect('play', self, 'add_level')
-	add_child(m_menu)
-
-func add_level(diff):
-	clear()
-	ToastSpawner.difficulty = diff
-	var level = LEVEL.instance()
-	level.connect('menu', self, 'add_main_menu')
-	add_child(level)

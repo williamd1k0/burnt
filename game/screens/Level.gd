@@ -15,7 +15,7 @@ var score = 0
 var playing = false
 
 func _ready():
-	if ToastSpawner.difficulty != null:
+	if difficulty == null and ToastSpawner.difficulty != null:
 		difficulty = ToastSpawner.difficulty
 
 func _input(event):
@@ -58,4 +58,8 @@ func _on_Play_pressed():
 	replay()
 
 func _on_Menu_pressed():
-	emit_signal('menu')
+	get_node("ScreenControl").kill()
+
+func _on_ScreenControl_scene_start( args ):
+	difficulty = args
+

@@ -1,6 +1,5 @@
 extends Node
 
-signal play(difficulty)
 
 var stack = []
 
@@ -18,7 +17,7 @@ func rollback_stack():
 	get_node("MenuStack").play(stack[0])
 
 func _on_Difficulty_pressed(diff):
-	emit_signal('play', diff.to_lower())
+	get_node("ScreenControl").next_scene(diff.to_lower())
 
 func _on_Play_pressed():
 	get_node("MenuStack").play("diff")
