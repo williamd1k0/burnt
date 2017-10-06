@@ -1,6 +1,5 @@
 extends Node
 
-signal menu
 
 export(bool) var auto_start = false
 export(String, 'easy', 'normal', 'hard') var difficulty
