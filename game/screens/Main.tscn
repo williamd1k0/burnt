@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://game/screens/Main.gd" type="Script" id=1]
+[ext_resource path="res://game/items/Fade.tscn" type="PackedScene" id=2]
 
 [node name="Main" type="Node" groups=[
 "main_scene",
@@ -8,5 +9,11 @@
 
 script/script = ExtResource( 1 )
 first_scene = "res://game/screens/MainMenu.tscn"
+
+[node name="GameScreen" type="Node2D" parent="."]
+
+[node name="Fade" parent="." instance=ExtResource( 2 )]
+
+layer = 2
 
 

@@ -3,6 +3,8 @@ extends Node
 const SCREEN_CONTROL = 'screen_control'
 
 export(String, FILE, '*.tscn,*.scn') var first_scene
+onready var screen = get_node("GameScreen")
+onready var fade = get_node("Fade")
 
 func _ready():
 	start_scene(first_scene)
@@ -10,7 +12,7 @@ func _ready():
 func start_scene(scene, args=null):
 	var scene_node = load(scene).instance()
 	var control
-	add_child(scene_node)
+	screen.add_child(scene_node)
 	if scene_node.is_in_group(SCREEN_CONTROL):
 		control = scene_node
 	else:
@@ -19,13 +21,17 @@ func start_scene(scene, args=null):
 				control = child
 				break
 	control.connect('scene_change', self, '_on_scene_change')
+	fade.fadein()
+	yield(fade, 'fadein')
 	control.start_scene(args)
 
 func _on_scene_change(scene, args):
-	clear() # TODO: fade stuff
+	fade.fadeout()
+	yield(fade, 'fadeout')
+	clear()
 	start_scene(scene, args)
 
 func clear():
-	if get_child_count() > 0:
-		for i in get_children():
+	if screen.get_child_count() > 0:
+		for i in screen.get_children():
 			i.queue_free()
