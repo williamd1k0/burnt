@@ -189,7 +189,7 @@ script/script = ExtResource( 1 )
 
 [node name="ScreenControl" parent="." instance=ExtResource( 2 )]
 
-next_scene = "Level"
+next_scene = "res://game/screens/Level.tscn"
 
 [node name="MenuStack" type="AnimationPlayer" parent="."]
 

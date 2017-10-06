@@ -1,16 +1,14 @@
 extends Node
 
 const SCREEN_CONTROL = 'screen_control'
-const SCREEN_BASE = 'res://game/screens/%s.tscn'
 
-export(String) var first_scene
+export(String, FILE, '*.tscn,*.scn') var first_scene
 
 func _ready():
 	start_scene(first_scene)
 
 func start_scene(scene, args=null):
-	print(SCREEN_BASE % scene)
-	var scene_node = load(SCREEN_BASE % scene).instance()
+	var scene_node = load(scene).instance()
 	var control
 	add_child(scene_node)
 	if scene_node.is_in_group(SCREEN_CONTROL):

@@ -178,7 +178,7 @@ ds_mode = false
 
 [node name="ScreenControl" parent="." instance=ExtResource( 2 )]
 
-next_scene = "MainMenu"
+next_scene = "res://game/screens/MainMenu.tscn"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
