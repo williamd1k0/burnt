@@ -1,12 +1,13 @@
 [gd_scene load_steps=2 format=1]
 
-[ext_resource path="res://game/globals/ToastSpawner.gd" type="Script" id=1]
+[ext_resource path="res://game/items/gameplay/ToastSpawner.gd" type="Script" id=1]
+
 
 [node name="ToastSpawner" type="Node"]
 
 script/script = ExtResource( 1 )
 interval = 1.0
-speed_up = null
+speed_up = FloatArray( 10, 0.5 )
 auto_start = false
 
 [node name="Timer" type="Timer" parent="."]

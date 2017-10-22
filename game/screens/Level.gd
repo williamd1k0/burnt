@@ -1,8 +1,8 @@
 extends Node2D
 
-
-export(bool) var auto_start = false
-export(String, 'easy', 'normal', 'hard') var difficulty
+export(String, \
+	'easy', 'normal', 'hard' \
+) var difficulty
 export(bool) var ds_mode = false
 
 const POINTS = [
@@ -14,8 +14,12 @@ var score = 0
 var playing = false
 
 func _ready():
-	if difficulty == null and ToastSpawner.difficulty != null:
-		difficulty = ToastSpawner.difficulty
+	if get_parent() == get_tree().get_root():
+		_main()
+	
+func _main():
+	print('DEBUG LEVEL')
+	start()
 
 func _input(event):
 	if event.is_action_pressed('pause') and playing:
@@ -23,6 +27,7 @@ func _input(event):
 		get_tree().set_pause(not get_tree().is_paused())
 
 func start():
+	prints('START', difficulty)
 	playing = true
 	get_node("Game").start(difficulty)
 
@@ -48,11 +53,6 @@ func _on_Game_gameover( by ):
 		get_node("ui/GameOver/Highscore").set_text(str(LocalScore.get_score(difficulty)))
 		get_node("AnimationPlayer").play("gameover")
 
-func _on_Game_ready():
-	if auto_start:
-		start()
-	set_process_input(true)
-
 func _on_Play_pressed():
 	replay()
 
@@ -61,4 +61,5 @@ func _on_Menu_pressed():
 
 func _on_ScreenControl_scene_start( args ):
 	difficulty = args
-
+	start()
+	set_process_input(true)

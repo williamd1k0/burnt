@@ -15,8 +15,10 @@ signal ready
 signal toasted(type)
 signal gameover(by)
 
-export(bool) var auto_start = false
-export(String, 'easy', 'normal', 'hard') var difficulty = 'easy'
+export(String, \
+	'easy', 'normal', 'hard' \
+) var difficulty = 'easy'
+
 const DIFFICULTY = {
 	'easy': {
 		'interval': 0.5,
@@ -35,17 +37,27 @@ const DIFFICULTY = {
 	}
 }
 
+onready var spawner = get_node("ToastSpawner")
+
 func _ready():
-	connect('gameover', self, '_on_gameover')
-	if auto_start:
-		start()
+	spawner.connect("spawned", get_node("Toaster"), "spawn_toast")
+	spawner.connect("spawned", get_node("Spawner"), "spawn_toast")
+	for hand in get_node("Hands").get_children():
+		hand.connect("miss", self, "miss")
+		hand.connect("toasted", self, "toasted")
+	if get_parent() == get_tree().get_root():
+		_main()
+
+func _main():
+	print('DEBUG GAME')
+	start()
 
 func start(diff=null):
 	if diff != null:
 		difficulty = diff
 	for toast in get_tree().get_nodes_in_group('toast'):
 		toast.free()
-	ToastSpawner.start(
+	spawner.start(
 		DIFFICULTY[difficulty]['interval'],
 		DIFFICULTY[difficulty]['speedup']
 	)
@@ -54,38 +66,27 @@ func start(diff=null):
 		hand.toast_cache.clear()
 
 func stop():
-	ToastSpawner.stop()
+	spawner.stop()
 
 func toasted(type):
 	prints('TOASTED', type)
 	if type == TOAST_BURNT:
-		emit_signal('gameover', GAMEOVER_BURNT)
+		gameover(GAMEOVER_BURNT)
 	else:
 		emit_signal('toasted', type)
 
 func miss(type):
-	prints('MISSED', type)
+	prints('MISS', type)
 	if type != TOAST_BURNT:
 		if type in DIFFICULTY[difficulty]['required']:
-			emit_signal('gameover', GAMEOVER_MISS)
+			gameover(GAMEOVER_MISS)
 
-func _on_LeftHand_toasted( type ):
-	toasted(type)
-
-func _on_RightHand_toasted( type ):
-	toasted(type)
-
-
-func _on_LeftHand_miss( type ):
-	miss(type)
-
-func _on_RightHand_miss( type ):
-	miss(type)
+func gameover(by):
+	stop()
+	for hand in get_node("Hands").get_children():
+		hand.enabled = false
+	emit_signal('gameover', by)
 
 func _on_AnimationPlayer_finished():
 	if get_node("AnimationPlayer").get_current_animation() == 'start':
 		emit_signal("ready")
-
-func _on_gameover(by):
-	for hand in get_node("Hands").get_children():
-		hand.enabled = false

@@ -172,7 +172,6 @@ margin = Rect2( 0, 0, 0, 0 )
 
 process/pause_mode = 2
 script/script = ExtResource( 1 )
-auto_start = true
 difficulty = "easy"
 ds_mode = false
 
@@ -198,7 +197,6 @@ process/pause_mode = 1
 
 [node name="ui" type="CanvasLayer" parent="."]
 
-editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -490,8 +488,6 @@ params/stretch_mode = 0
 [connection signal="scene_start" from="ScreenControl" to="." method="_on_ScreenControl_scene_start"]
 
 [connection signal="gameover" from="Game" to="." method="_on_Game_gameover"]
-
-[connection signal="ready" from="Game" to="." method="_on_Game_ready"]
 
 [connection signal="toasted" from="Game" to="." method="_on_Game_toasted"]
 

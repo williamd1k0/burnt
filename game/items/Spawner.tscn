@@ -7,9 +7,6 @@
 [node name="Spawner" type="Node2D"]
 
 script/script = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 toast_follow = ExtResource( 2 )
 
 [node name="Paths" parent="." instance=ExtResource( 3 )]

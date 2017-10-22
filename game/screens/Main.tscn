@@ -12,6 +12,10 @@ first_scene = "res://game/screens/MainMenu.tscn"
 
 [node name="GameScreen" type="Node2D" parent="."]
 
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Fade" parent="." instance=ExtResource( 2 )]
 
 layer = 2

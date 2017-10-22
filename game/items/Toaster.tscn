@@ -39,22 +39,24 @@ region_rect = Rect2( 3, 16, 18, 16 )
 script/script = ExtResource( 2 )
 torrou_mode = false
 
-[node name="Toasts-1" type="Node2D" parent="."]
+[node name="Layers" type="Node2D" parent="."]
+
+[node name="Toasts-1" type="Node2D" parent="Layers"]
 
 transform/pos = Vector2( 0, 3 )
 
-[node name="Toaster-1" type="Sprite" parent="."]
+[node name="Toaster-1" type="Sprite" parent="Layers"]
 
 transform/pos = Vector2( 0, 2 )
 texture = ExtResource( 1 )
 region = true
 region_rect = Rect2( 3, 20, 18, 12 )
 
-[node name="Toasts1" type="Node2D" parent="."]
+[node name="Toasts1" type="Node2D" parent="Layers"]
 
 transform/pos = Vector2( 0, -2 )
 
-[node name="Toaster1" type="Sprite" parent="."]
+[node name="Toaster1" type="Sprite" parent="Layers"]
 
 transform/pos = Vector2( 0, 3 )
 texture = ExtResource( 1 )

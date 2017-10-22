@@ -4,7 +4,10 @@ extends Sprite
 signal toasted(type)
 signal miss(type)
 
-export(String, 'none', 'left', 'right') var hand setget _set_hand
+export(String, \
+	'none', 'left', 'right' \
+) var hand setget _set_hand
+
 var open = false
 var toast_cache = []
 var enabled = true
@@ -21,7 +24,6 @@ func _process(delta):
 		set_open(false)
 	if open and not toast_cache.empty() and is_visible():
 		for toast in toast_cache:
-			print(toast)
 			toast_cache.remove(toast_cache.find(toast))
 			var type = toast.toasted()
 			emit_signal('toasted', type)

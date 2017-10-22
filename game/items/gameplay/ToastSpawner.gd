@@ -8,17 +8,10 @@ const TOASTS = [
 	'burnt'
 ]
 
-const TOASTS_NODES = {
-	'common': preload('res://game/items/toasts/Toast.tscn'),
-	'jam': preload('res://game/items/toasts/ToastJam.tscn'),
-	'burnt': preload('res://game/items/toasts/ToastBurnt.tscn')
-}
-
 export(float) var interval = 0.5
 export(FloatArray) var speed_up = FloatArray([10, 0.5])
 export(bool) var auto_start = false
 var enabled = false
-var difficulty
 
 func _ready():
 	#connect('spawned', self, '_on_spawned')

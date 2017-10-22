@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://game/items/gameplay/Game.gd" type="Script" id=1]
-[ext_resource path="res://game/items/Background.tscn" type="PackedScene" id=2]
-[ext_resource path="res://game/items/Hand.tscn" type="PackedScene" id=3]
-[ext_resource path="res://game/items/Toaster.tscn" type="PackedScene" id=4]
-[ext_resource path="res://game/items/Spawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/items/gameplay/ToastSpawner.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/items/Background.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/items/Hand.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/items/Toaster.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/items/Spawner.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=1]
 
@@ -61,30 +62,31 @@ script/script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-auto_start = false
 difficulty = "easy"
 
-[node name="Background" parent="." instance=ExtResource( 2 )]
+[node name="ToastSpawner" parent="." instance=ExtResource( 2 )]
+
+[node name="Background" parent="." instance=ExtResource( 3 )]
 
 [node name="Hands" type="Node2D" parent="."]
 
 transform/pos = Vector2( 0, 23 )
 
-[node name="LeftHand" parent="Hands" instance=ExtResource( 3 )]
+[node name="LeftHand" parent="Hands" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 12, 52 )
 
-[node name="RightHand" parent="Hands" instance=ExtResource( 3 )]
+[node name="RightHand" parent="Hands" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 52, 52 )
 transform/scale = Vector2( -1, 1 )
 hand = "right"
 
-[node name="Toaster" parent="." instance=ExtResource( 4 )]
+[node name="Toaster" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 32, 31 )
 
-[node name="Spawner" parent="." instance=ExtResource( 5 )]
+[node name="Spawner" parent="." instance=ExtResource( 6 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -98,14 +100,6 @@ playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = "start"
-
-[connection signal="miss" from="Hands/LeftHand" to="." method="_on_LeftHand_miss"]
-
-[connection signal="toasted" from="Hands/LeftHand" to="." method="_on_LeftHand_toasted"]
-
-[connection signal="miss" from="Hands/RightHand" to="." method="_on_RightHand_miss"]
-
-[connection signal="toasted" from="Hands/RightHand" to="." method="_on_RightHand_toasted"]
 
 [connection signal="finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_finished"]
 

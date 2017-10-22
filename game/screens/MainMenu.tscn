@@ -206,7 +206,6 @@ autoplay = "start"
 [node name="Game" parent="." instance=ExtResource( 3 )]
 
 editor/display_folded = true
-auto_start = true
 
 [node name="Hands" parent="Game"]
 
@@ -218,7 +217,6 @@ autoplay = ""
 
 [node name="ui" type="CanvasLayer" parent="."]
 
-editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
