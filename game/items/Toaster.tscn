@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://assets/textures/lowrezjam.png" type="Texture" id=1]
 [ext_resource path="res://game/items/Toaster.gd" type="Script" id=2]
@@ -31,6 +31,11 @@ tracks/1/keys = {
 "values": [ "eject" ]
 }
 
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 9.84193, 7.68692 )
+
 [node name="Toaster" type="Sprite"]
 
 texture = ExtResource( 1 )
@@ -41,24 +46,30 @@ torrou_mode = false
 
 [node name="Layers" type="Node2D" parent="."]
 
-[node name="Toasts-1" type="Node2D" parent="Layers"]
+[node name="Toasts1" type="Node2D" parent="Layers"]
 
 transform/pos = Vector2( 0, 3 )
 
-[node name="Toaster-1" type="Sprite" parent="Layers"]
+[node name="Node" type="Node" parent="Layers/Toasts1"]
+
+[node name="Toaster1" type="Sprite" parent="Layers"]
 
 transform/pos = Vector2( 0, 2 )
+z/z = 1
 texture = ExtResource( 1 )
 region = true
 region_rect = Rect2( 3, 20, 18, 12 )
 
-[node name="Toasts1" type="Node2D" parent="Layers"]
+[node name="Toasts2" type="Node2D" parent="Layers"]
 
 transform/pos = Vector2( 0, -2 )
 
-[node name="Toaster1" type="Sprite" parent="Layers"]
+[node name="Node" type="Node" parent="Layers/Toasts2"]
+
+[node name="Toaster2" type="Sprite" parent="Layers"]
 
 transform/pos = Vector2( 0, 3 )
+z/z = 2
 texture = ExtResource( 1 )
 region = true
 region_rect = Rect2( 3, 22, 18, 10 )
@@ -91,5 +102,22 @@ playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
+
+[node name="HitBox" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
 
 

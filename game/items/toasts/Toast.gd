@@ -1,17 +1,21 @@
 extends Area2D
 
 
-signal toasted
+signal toasted(type)
 
 export(int, \
 	'common', 'jam', 'burnt' \
 ) var type = 0
 
 func toasted():
-	emit_signal('toasted')
+	emit_signal('toasted', type)
 	queue_free()
 	return type
 
 func bump():
-	# Rotating pixel art is a crime, don't try this at home
-	get_node("AnimationPlayer").play("crime")
+	get_node("AnimationPlayer").play("roll")
+
+func _on_Toast_area_enter( area ):
+	if area.is_in_group('shoot') and get_global_pos().y > 0:
+		bump()
+		toasted()

@@ -1,5 +1,7 @@
 extends Node2D
 
+signal toasted(type)
+
 export(PackedScene) var toast_follow
 const SIDES = {
 	-1: 0,
@@ -30,4 +32,8 @@ func spawn_toast(toast_name):
 	side_node.get_child(rand).add_child(follow)
 	var toast = TOASTS_NODES[toast_name].instance()
 	follow.spawn_toast(toast)
+	toast.connect('toasted', self, 'emit_toasted')
 	side *= -1
+
+func emit_toasted(type):
+	emit_signal("toasted", type)

@@ -19,6 +19,8 @@ func rollback_stack():
 	get_node("MenuStack").play(stack[0])
 
 func _on_Difficulty_pressed(diff):
+	if '--torrou' in OS.get_cmdline_args():
+		get_node("ScreenControl").next_scene = "res://game/screens/TorrouLevel.tscn"
 	get_node("ScreenControl").next_scene({
 		'diff': diff.to_lower(),
 		'ds-mode': '--ds-mode' in OS.get_cmdline_args()

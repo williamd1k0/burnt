@@ -10,7 +10,7 @@ extents = Vector2( 7, 7 )
 
 [sub_resource type="Animation" id=2]
 
-resource/name = "crime"
+resource/name = "roll"
 length = 1.0
 loop = false
 step = 0.1
@@ -29,6 +29,7 @@ tracks/0/keys = {
 "toast",
 ]]
 
+z/z = 2
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 1 )
@@ -61,10 +62,12 @@ _update_shape_index = 0
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/crime = SubResource( 2 )
+anims/roll = SubResource( 2 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
+
+[connection signal="area_enter" from="." to="." method="_on_Toast_area_enter"]
 
 
