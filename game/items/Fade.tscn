@@ -66,6 +66,6 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 64.0
 margin/bottom = 64.0
-color = Color( 1, 1, 1, 1 )
+color = Color( 0, 0, 0, 1 )
 
 

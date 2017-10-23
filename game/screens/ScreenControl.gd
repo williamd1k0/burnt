@@ -4,6 +4,7 @@ signal scene_start(args)
 signal scene_change(scene, args)
 
 export(String, FILE, '*.tscn,*.scn') var next_scene
+export(bool) var kill_ = false setget _set_kill
 var args
 var next_args
 
@@ -20,6 +21,10 @@ func change_scene(nextscene=null, nextargs=null):
 
 func next_scene(nextargs=null):
 	change_scene(next_scene, nextargs)
+
+func _set_kill(val):
+	if val:
+		kill()
 
 func kill():
 	change_scene()

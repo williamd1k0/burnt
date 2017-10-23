@@ -60,6 +60,8 @@ func _on_Menu_pressed():
 	get_node("ScreenControl").kill()
 
 func _on_ScreenControl_scene_start( args ):
-	difficulty = args
+	difficulty = args['diff']
+	if 'ds-mode' in args:
+		ds_mode = args['ds-mode']
 	start()
 	set_process_input(true)

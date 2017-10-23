@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=1]
+[gd_scene load_steps=20 format=1]
 
 [ext_resource path="res://game/screens/Level.gd" type="Script" id=1]
 [ext_resource path="res://game/screens/ScreenControl.tscn" type="PackedScene" id=2]
@@ -89,9 +89,26 @@ script/source = "extends Control
 func you_died():
 	get_node(\"AnimationPlayer\").play(\"you_died\")"
 
+[sub_resource type="CanvasItemShader" id=13]
+
+_code = {
+"fragment": "
+COLOR.rgb = texscreen(SCREEN_UV).rrr/3;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=14]
+
+shader/shader = SubResource( 13 )
+shader/shading_mode = 0
+
 [sub_resource type="Animation" id=4]
 
-length = 1.0
+length = 3.0
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -113,6 +130,16 @@ tracks/1/keys = {
 "transitions": FloatArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../ScreenControl:kill_")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
+"times": FloatArray( 0, 3 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 2,
+"values": [ false, true ]
 }
 
 [sub_resource type="CanvasItemShader" id=5]
@@ -178,6 +205,7 @@ ds_mode = false
 [node name="ScreenControl" parent="." instance=ExtResource( 2 )]
 
 next_scene = "res://game/screens/MainMenu.tscn"
+kill_ = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -256,8 +284,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="ColorFrame" type="ColorFrame" parent="ui/DsMode"]
+[node name="Overlay" type="ColorFrame" parent="ui/DsMode"]
 
+material/material = SubResource( 14 )
 focus/ignore_mouse = true
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -266,7 +295,7 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 64.0
 margin/bottom = 64.0
-color = Color( 0.113281, 0.113281, 0.113281, 0.55051 )
+color = Color( 1, 1, 1, 1 )
 
 [node name="ColorFrame1" type="ColorFrame" parent="ui/DsMode"]
 
@@ -275,10 +304,10 @@ focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 16.0
+margin/top = 29.0
 margin/right = 64.0
-margin/bottom = 24.0
-color = Color( 0.0703125, 0.0703125, 0.0703125, 0.55051 )
+margin/bottom = 37.0
+color = Color( 0, 0, 0, 0.767686 )
 
 [node name="YouDied" type="Label" parent="ui/DsMode"]
 
@@ -287,9 +316,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 8.0
-margin/top = 17.0
+margin/top = 30.0
 margin/right = 72.0
-margin/bottom = 24.0
+margin/bottom = 37.0
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.65625, 0.0769043, 0.0769043, 1 )
 text = "You       Died"
@@ -353,6 +382,7 @@ max_lines_visible = -1
 
 [node name="GameOver" type="Control" parent="ui"]
 
+editor/display_folded = true
 visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
