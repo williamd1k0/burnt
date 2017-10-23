@@ -13,6 +13,7 @@ func _ready():
 	has_joy = not Input.get_connected_joysticks().empty()
 	Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")
 	if torrou_mode:
+		get_node("Hazukashii").show()
 		set_torrou(true)
 		get_node("HitBox").connect("area_enter", self, "_on_area_enter")
 	if get_parent() == get_tree().get_root():

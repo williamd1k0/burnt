@@ -7,6 +7,12 @@ onready var screen = get_node("GameScreen")
 onready var fade = get_node("Fade")
 
 func _ready():
+	var title = "B U R N T™"
+	if '--torrou' in OS.get_cmdline_args():
+		title = "TORROU™"
+	if '--ds-mode' in OS.get_cmdline_args():
+		title += " [DARK SOULS™️]"
+	OS.set_window_title(title)
 	start_scene(first_scene)
 
 func start_scene(scene, args=null):

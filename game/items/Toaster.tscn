@@ -46,6 +46,8 @@ torrou_mode = false
 
 [node name="Layers" type="Node2D" parent="."]
 
+editor/display_folded = true
+
 [node name="Toasts1" type="Node2D" parent="Layers"]
 
 transform/pos = Vector2( 0, 3 )
@@ -80,6 +82,15 @@ transform/pos = Vector2( 10, 1 )
 texture = ExtResource( 1 )
 region = true
 region_rect = Rect2( 21, 23, 2, 4 )
+
+[node name="Hazukashii" type="Sprite" parent="."]
+
+visibility/visible = false
+transform/pos = Vector2( 0, 3 )
+z/z = 2
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 0, 32, 24, 8 )
 
 [node name="Sfx" type="SamplePlayer2D" parent="."]
 
