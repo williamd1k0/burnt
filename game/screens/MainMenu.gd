@@ -5,7 +5,7 @@ var stack = []
 
 func _ready():
 	for button in get_node("ui/Menus/Difficulty/Buttons").get_children():
-		if '--ds-mode' in OS.get_cmdline_args():
+		if GameMode.is_dark_souls():
 			button.set_hidden(button.get_name() != 'Hard')
 		button.connect('pressed', self, '_on_Difficulty_pressed', [button.get_name()])
 	set_process_input(true)
@@ -19,11 +19,11 @@ func rollback_stack():
 	get_node("MenuStack").play(stack[0])
 
 func _on_Difficulty_pressed(diff):
-	if '--torrou' in OS.get_cmdline_args():
+	if GameMode.is_torrou():
 		get_node("ScreenControl").next_scene = "res://game/screens/TorrouLevel.tscn"
 	get_node("ScreenControl").next_scene({
 		'diff': diff.to_lower(),
-		'ds-mode': '--ds-mode' in OS.get_cmdline_args()
+		'ds-mode': GameMode.is_dark_souls()
 	})
 
 func _on_Play_pressed():

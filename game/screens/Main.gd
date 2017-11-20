@@ -7,10 +7,23 @@ onready var screen = get_node("GameScreen")
 onready var fade = get_node("Fade")
 
 func _ready():
+	start_game()
+	set_process_input(true)
+
+func _input(event):
+	if event.is_action_pressed("restart"):
+		clear()
+		start_game()
+	elif event.is_action_pressed("torrou"):
+		GameMode.mode ^= GameMode.TORROU
+	elif event.is_action_pressed("dark_souls"):
+		GameMode.mode ^= GameMode.DARK_SOULS
+
+func start_game():
 	var title = "B U R N T™"
-	if '--torrou' in OS.get_cmdline_args():
+	if GameMode.is_torrou():
 		title = "TORROU™"
-	if '--ds-mode' in OS.get_cmdline_args():
+	if GameMode.is_dark_souls():
 		title += " [DARK SOULS™️]"
 	OS.set_window_title(title)
 	start_scene(first_scene)
