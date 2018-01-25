@@ -1,6 +1,7 @@
 [gd_resource type="DynamicFont" load_steps=2 format=1]
 
-[ext_resource path="res://assets/fonts/5×5.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/5x5.ttf" type="DynamicFontData" id=1]
+
 
 [resource]
 

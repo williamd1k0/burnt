@@ -9,6 +9,7 @@ export(String, \
 ) var hand setget _set_hand
 
 var open = false
+var touching = false
 var toast_cache = []
 var enabled = true
 
@@ -20,7 +21,7 @@ func _ready():
 func _process(delta):
 	if Input.is_action_pressed("%s-hand" % hand) and can_move():
 		set_open(true)
-	elif can_move():
+	elif can_move() and not touching:
 		set_open(false)
 	if open and not toast_cache.empty() and is_visible():
 		for toast in toast_cache:
@@ -39,6 +40,7 @@ func _set_hand(side):
 		set_scale(Vector2(0, 0))
 
 func set_open(val):
+	print(val, open)
 	if val != open:
 		open = val
 		if open:
@@ -60,5 +62,6 @@ func _on_Area2D_area_exit( area ):
 		emit_signal('miss', area.type)
 
 func _on_input_event( viewport, event, shape_idx ):
-	if event.type in [InputEvent.MOUSE_BUTTON, InputEvent.SCREEN_TOUCH]:
-		set_open(event.is_pressed())
+	if event.type in [InputEvent.MOUSE_BUTTON, InputEvent.SCREEN_TOUCH] and can_move():
+		touching = event.pressed
+		set_open(event.pressed)
